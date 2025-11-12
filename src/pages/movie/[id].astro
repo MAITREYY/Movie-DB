@@ -16,7 +16,7 @@ const trailer = trailerData.results?.find(v => v.type === "Trailer");
     <main class="movie-detail">
       <img src={`https://image.tmdb.org/t/p/w780${movie.backdrop_path}`} alt={movie.title} />
       <h1>{movie.title}</h1>
-      <p><strong>Rating:</strong> {movie.vote_average}</p>
+      <p><strong>Rating:</strong> {movie.vote_average.toFixed(1)}</p>
       <p><strong>Overview:</strong> {movie.overview}</p>
       {trailer ? (
         <a href={`https://www.youtube.com/watch?v=${trailer.key}`} target="_blank" class="btn">Watch Trailer</a>
