@@ -1,0 +1,31 @@
+---
+import "../styles/global.css";
+import MoodButton from "../components/MoodButton.astro";
+
+const moods = [
+  { name: "Happy", emoji: "😄" },
+  { name: "Romantic", emoji: "💘" },
+  { name: "Sad", emoji: "😢" },
+  { name: "Adventurous", emoji: "🌍" },
+  { name: "Scary", emoji: "👻" },
+  { name: "Thoughtful", emoji: "🤔" },
+];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CineMood 🎬</title>
+  </head>
+  <body>
+    <main>
+      <h1>🎬 Welcome to <span style="color:var(--accent)">CineMood</span></h1>
+      <p>Hey there 👋 How are you feeling today?</p>
+
+      <div class="mood-grid">
+        {moods.map((m) => <MoodButton mood={m.name} emoji={m.emoji} />)}
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+---
+const { mood, emoji } = Astro.props;
+---
+
+<a href={`/mood/${mood.toLowerCase()}`} class="mood-btn">
+  <span class="emoji">{emoji}</span>
+  <span>{mood}</span>
+</a>

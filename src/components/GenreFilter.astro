@@ -1,0 +1,16 @@
+---
+const { genres, selectedGenre, setGenre } = Astro.props;
+---
+
+<div class="mb-6 flex items-center gap-2">
+  <label class="font-medium text-gray-700">Filter:</label>
+  <select 
+    class="border border-gray-300 rounded-lg p-2 focus:outline-none"
+    onChange={(e) => setGenre(e.target.value)}
+  >
+    <option value="">All Genres</option>
+    {genres.map((g) => (
+      <option selected={selectedGenre == g.id} value={g.id}>{g.name}</option>
+    ))}
+  </select>
+</div>

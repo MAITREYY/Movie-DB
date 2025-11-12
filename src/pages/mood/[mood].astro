@@ -1,0 +1,40 @@
+---
+export const prerender = false;
+import MovieCard from "../../components/MovieCard.astro";
+import "../../styles/global.css";
+
+const { mood } = Astro.params;
+const API_KEY = import.meta.env.TMDB_API_KEY ?? "YOUR_API_KEY";
+
+const genreMap = {
+  happy: "35,12",
+  romantic: "10749",
+  sad: "18",
+  adventurous: "28,12",
+  scary: "27,53",
+  thoughtful: "99,18"
+};
+
+const genres = genreMap[mood] ?? "35";
+const url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${genres}`;
+const res = await fetch(url);
+const data = await res.json();
+const movies = data.results ?? [];
+---
+
+<html lang="en">
+  <body>
+    <main>
+      <h1>Feeling {mood.charAt(0).toUpperCase() + mood.slice(1)}?</h1>
+      <p>Here are some films that match your vibe 🎥</p>
+
+      <div class="movie-grid">
+        {movies.map((m) => <MovieCard movie={m} />)}
+      </div>
+
+      <div style="margin-top:2rem;">
+        <a href="/" class="btn">⬅️ Back to Moods</a>
+      </div>
+    </main>
+  </body>
+</html>

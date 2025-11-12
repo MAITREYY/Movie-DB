@@ -1,0 +1,31 @@
+---
+export const prerender = false;
+import "../../styles/global.css";
+
+const { id } = Astro.params;
+const API_KEY = import.meta.env.TMDB_API_KEY ?? "YOUR_API_KEY";
+const movieRes = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`);
+const trailerRes = await fetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}`);
+const movie = await movieRes.json();
+const trailerData = await trailerRes.json();
+const trailer = trailerData.results?.find(v => v.type === "Trailer");
+---
+
+<html lang="en">
+  <body>
+    <main class="movie-detail">
+      <img src={`https://image.tmdb.org/t/p/w780${movie.backdrop_path}`} alt={movie.title} />
+      <h1>{movie.title}</h1>
+      <p><strong>Rating:</strong> {movie.vote_average}</p>
+      <p><strong>Overview:</strong> {movie.overview}</p>
+      {trailer ? (
+        <a href={`https://www.youtube.com/watch?v=${trailer.key}`} target="_blank" class="btn">🎬 Watch Trailer</a>
+      ) : (
+        <p>No trailer available.</p>
+      )}
+      <div style="margin-top:1.5rem;">
+        <a href="/" class="btn">⬅️ Back Home</a>
+      </div>
+    </main>
+  </body>
+</html>
