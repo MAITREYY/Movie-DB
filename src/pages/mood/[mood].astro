@@ -26,7 +26,7 @@ const movies = data.results ?? [];
   <body>
     <main>
       <h1>Feeling {mood.charAt(0).toUpperCase() + mood.slice(1)}?</h1>
-      <p>Here are some films that match your vibe 🎥</p>
+      <p>Here are some films that match your vibe</p>
 
       <div class="movie-grid">
         {movies.map((m) => <MovieCard movie={m} />)}

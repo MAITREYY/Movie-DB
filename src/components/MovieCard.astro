@@ -1,13 +1,27 @@
 ---
 const { movie } = Astro.props;
 const imgBase = "https://image.tmdb.org/t/p/w500";
+const API_KEY = import.meta.env.TMDB_API_KEY ?? "YOUR_API_KEY";
+
+let runtime = null;
+try {
+  const res = await fetch(`https://api.themoviedb.org/3/movie/${movie.id}?api_key=${API_KEY}`);
+  if (res.ok) {
+    const fullData = await res.json();
+    runtime = fullData.runtime;
+  }
+} catch (err) {
+  console.error("Error fetching movie runtime:", err);
+}
 ---
 
 <div class="movie-card">
   <img src={movie.poster_path ? `${imgBase}${movie.poster_path}` : "/placeholder.png"} alt={movie.title} />
   <div class="info">
     <h2>{movie.title}</h2>
+    <p>Language: {movie.original_language.toUpperCase()}</p>
     <p>Rating :  {movie.vote_average.toFixed(1)}</p>
+    <p><small>Runtime</small> {runtime && ` ${runtime} min`}</p>
     <a href={`/movie/${movie.id}`} class="btn">More Info</a>
   </div>
 </div>
