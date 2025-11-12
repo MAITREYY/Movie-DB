@@ -19,12 +19,12 @@ const trailer = trailerData.results?.find(v => v.type === "Trailer");
       <p><strong>Rating:</strong> {movie.vote_average}</p>
       <p><strong>Overview:</strong> {movie.overview}</p>
       {trailer ? (
-        <a href={`https://www.youtube.com/watch?v=${trailer.key}`} target="_blank" class="btn">🎬 Watch Trailer</a>
+        <a href={`https://www.youtube.com/watch?v=${trailer.key}`} target="_blank" class="btn">Watch Trailer</a>
       ) : (
         <p>No trailer available.</p>
       )}
       <div style="margin-top:1.5rem;">
-        <a href="/" class="btn">⬅️ Back Home</a>
+        <a href="/" class="btn">Back Home</a>
       </div>
     </main>
   </body>
